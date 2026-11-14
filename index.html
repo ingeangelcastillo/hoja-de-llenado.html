@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PS Alarmas - Hoja de Llenado</title>
+<style>
+  *{box-sizing:border-box;font-family:Arial,sans-serif}
+  body{margin:0;background:#f1f3f6;padding:12px}
+  .card{max-width:650px;margin:auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  .header{background:#0b1e3a;color:#fff;padding:18px;text-align:center}
+  .header h1{margin:0;font-size:24px;letter-spacing:1px}
+  .header p{margin:4px 0 0;color:#ffcc00;font-weight:bold}
+  .menu{display:flex;justify-content:center;gap:8px;background:#132f57;padding:10px}
+  .menu span{color:#fff;background:#1e4a7a;padding:7px 12px;border-radius:20px;font-size:13px}
+  .menu .active{background:#ffcc00;color:#000;font-weight:bold}
+  .body{padding:16px}
+  h2{font-size:16px;color:#0b1e3a;border-left:5px solid #ffcc00;padding-left:8px;margin-top:22px}
+  label{font-size:13px;font-weight:bold;display:block;margin:12px 0 5px}
+  input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;font-size:15px}
+  textarea{min-height:70px}
+  .row{display:flex;gap:10px}
+  .row>div{flex:1}
+  .check{display:flex;flex-wrap:wrap;gap:8px}
+  .check label{font-weight:normal;background:#eef2f7;padding:9px 12px;border-radius:20px;margin:0}
+  .btn{width:100%;padding:15px;border:none;border-radius:12px;font-size:17px;font-weight:bold;margin-top:18px;cursor:pointer}
+  .btn-send{background:#ffcc00}
+  .btn-pdf{background:#0b1e3a;color:#fff}
+  .footer{text-align:center;font-size:12px;color:#777;padding:10px}
+  @media print{body{background:#fff;padding:0}.btn,.menu{display:none!important}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <h1>PS ALARMAS</h1>
+    <p>HOJA DE LLENADO - REPORTE DE SERVICIO</p>
+  </div>
+  <div class="menu"><span>INICIO</span><span>Registro Técnico</span><span class="active">Hoja de Llenado</span></div>
+
+  <div class="body">
+    <h2>1. Tipo de Reporte</h2>
+    <label>Tipo de reporte</label>
+    <div class="check">
+      <label><input type="checkbox"> CCTV</label>
+      <label><input type="checkbox"> Intrusión</label>
+      <label><input type="checkbox"> Control de Acceso</label>
+      <label><input type="checkbox"> Incendio</label>
+      <label><input type="checkbox"> Redes</label>
+    </div>
+    <label>Tipo de servicio</label>
+    <div class="check">
+      <label><input type="checkbox"> Mantenimiento Correctivo</label>
+      <label><input type="checkbox"> Mantenimiento Preventivo</label>
+      <label><input type="checkbox"> Instalación</label>
+      <label><input type="checkbox"> Desinstalación</label>
+      <label><input type="checkbox"> Programación</label>
+    </div>
+
+    <div class="row">
+      <div><label>Fecha</label><input type="date"></div>
+      <div><label>N. de Servicio</label><input type="text" placeholder="Ej. 00125"></div>
+    </div>
+
+    <h2>2. Datos del Cliente</h2>
+    <label>Nombre del cliente</label><input type="text" placeholder="Nombre completo">
+    <div class="row">
+      <div><label>N. de cliente</label><input type="text"></div>
+      <div><label>Teléfono</label><input type="tel"></div>
+    </div>
+    <label>Dirección</label><input type="text" placeholder="Calle, número, colonia, municipio">
+    <label>Correo</label><input type="email" placeholder="correo@ejemplo.com">
+
+    <h2>3. Datos del Reporte</h2>
+    <label>Trabajo solicitado</label><textarea placeholder="¿Qué pidió el cliente?"></textarea>
+    <label>Trabajo realizado</label><textarea placeholder="¿Qué hiciste?"></textarea>
+    <label>Resultado en %</label><input type="number" placeholder="Ej. 100">
+    <label>Requerimiento de equipo</label><textarea placeholder="¿Qué falta comprar / instalar?"></textarea>
+    <label>Pendientes</label><textarea></textarea>
+    <label>Pruebas realizadas</label><textarea placeholder="Pruebas con foto, video, etc."></textarea>
+
+    <h2>4. Aceptación del Cliente</h2>
+    <label>Comentarios del cliente</label><textarea></textarea>
+    <label>Comprobación</label><input type="text" placeholder="Conforme / No conforme">
+    <label>Nombre del técnico</label><input type="text" placeholder="Ángel Raúl Castillo Jiménez">
+    <label>Firma del cliente</label><input type="text" placeholder="Nombre y firma">
+
+    <button class="btn btn-send" onclick="alert('Reporte guardado. ¡Listo para enviar!')">ENVIAR REPORTE</button>
+    <button class="btn btn-pdf" onclick="window.print()">GENERAR PDF / IMPRIMIR</button>
+    <p style="text-align:center;font-size:13px;color:#555">Al generar PDF, elige "Guardar como PDF" y mándalo por WhatsApp</p>
+  </div>
+  <div class="footer">PS Alarmas • Sistema de Reportes • ingeangelcastillo</div>
+</div>
+</body>
+</html>

@@ -9,13 +9,11 @@
   body{margin:0;background:#f1f3f6;padding:12px}
   .card{max-width:650px;margin:auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.12)}
   .header{background:#0b1e3a;color:#fff;padding:18px;text-align:center}
-  .header h1{margin:0;font-size:24px;letter-spacing:1px}
-  .header p{margin:4px 0 0;color:#ffcc00;font-weight:bold}
-  .menu{display:flex;justify-content:center;gap:8px;background:#132f57;padding:10px}
-  .menu span{color:#fff;background:#1e4a7a;padding:7px 12px;border-radius:20px;font-size:13px}
-  .menu .active{background:#ffcc00;color:#000;font-weight:bold}
+  .header img{width:70px;height:70px;object-fit:cover;border-radius:50%;border:2px solid #add8e6;background:#fff}
+  .header h1{margin:6px 0 0;font-size:24px;letter-spacing:1px}
+  .header p{margin:4px 0 0;color:#add8e6;font-weight:bold}
   .body{padding:16px}
-  h2{font-size:16px;color:#0b1e3a;border-left:5px solid #ffcc00;padding-left:8px;margin-top:22px}
+  h2{font-size:16px;color:#0b1e3a;border-left:5px solid #add8e6;padding-left:8px;margin-top:22px}
   label{font-size:13px;font-weight:bold;display:block;margin:12px 0 5px}
   input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;font-size:15px}
   textarea{min-height:70px}
@@ -24,19 +22,29 @@
   .check{display:flex;flex-wrap:wrap;gap:8px}
   .check label{font-weight:normal;background:#eef2f7;padding:9px 12px;border-radius:20px;margin:0}
   .btn{width:100%;padding:15px;border:none;border-radius:12px;font-size:17px;font-weight:bold;margin-top:18px;cursor:pointer}
-  .btn-send{background:#ffcc00}
+  .btn-send{background:#add8e6;color:#0b1e3a}
   .btn-pdf{background:#0b1e3a;color:#fff}
   .footer{text-align:center;font-size:12px;color:#777;padding:10px}
-  @media print{body{background:#fff;padding:0}.btn,.menu{display:none!important}.card{box-shadow:none}}
+  .upload-box{border:2px dashed #87ceeb;background:#f0f8ff;border-radius:12px;padding:12px;margin-top:8px}
+  .upload-box p{margin:0 0 8px;font-size:13px;color:#0b1e3a;font-weight:bold}
+  .upload-btn{display:inline-block;background:#0b1e3a;color:#fff;padding:10px 14px;border-radius:20px;font-size:13px;font-weight:bold;cursor:pointer;margin-right:8px;margin-top:6px}
+  .upload-btn.blue{background:#87ceeb;color:#0b1e3a}
+  input[type="file"]{display:none}
+  #firmaCanvas{width:100%;height:150px;border:2px solid #0b1e3a;border-radius:10px;background:#fff;touch-action:none}
+  .btn-clear{background:#eef2f7;color:#0b1e3a;padding:8px 14px;border:none;border-radius:20px;font-size:13px;font-weight:bold;margin-top:8px;cursor:pointer}
+  .preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .preview img{width:48%;height:100px;object-fit:cover;border-radius:8px;border:1px solid #ccc}
+  .preview small{width:100%;color:#555;font-size:12px}
+  @media print{body{background:#fff;padding:0}.btn,.btn-clear,.no-print{display:none!important}.card{box-shadow:none}.preview img{width:48%!important;height:120px!important}}
 </style>
 </head>
 <body>
 <div class="card">
   <div class="header">
+    <img id="logoImg" src="https://scontent.cdninstagram.com/v/t51.2885-19/448865857_796438862552395_6543055122121325633_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=105&ig_cache_key=GEEmwRpL3XxfW9QCAEF814v3mc1abkULAAAB1501500j-ccb7-5&ccb=7-5&_nc_sid=669407&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDE2LkMzIn0%3D&_nc_ohc=_m0AeYPziScQ7kNvwH3JflS&_nc_oc=AdrZon2Q_3h9JMZpMwF6Uk1EWCqjrc7kvqiAJDgFHoj_AYcZntOoIx8xIJeBnoJfx8rMIcK8zX0Hvpo7VHJFSj-t&_nc_ad=z-m&_nc_cid=0&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_ct=RQosPBUCFQIAAAA&oh=00_AQSi3L4NKwOYJO6gFSAiG-q_lK3eaUVUnAs3QZTGkSkD9A&oe=6B0261B2" alt="PS Alarmas">
     <h1>PS ALARMAS</h1>
     <p>HOJA DE LLENADO - REPORTE DE SERVICIO</p>
   </div>
-  <div class="menu"><span>INICIO</span><span>Registro Técnico</span><span class="active">Hoja de Llenado</span></div>
 
   <div class="body">
     <h2>1. Tipo de Reporte</h2>
@@ -58,8 +66,8 @@
     </div>
 
     <div class="row">
-      <div><label>Fecha</label><input type="date"></div>
-      <div><label>N. de Servicio</label><input type="text" placeholder="Ej. 00125"></div>
+      <div><label>Fecha</label><input type="date" id="fecha"></div>
+      <div><label>N. de Servicio (se hace solo)</label><input type="text" id="numServicio" readonly style="background:#eef2f7;font-weight:bold;color:#0b1e3a"></div>
     </div>
 
     <h2>2. Datos del Cliente</h2>
@@ -77,19 +85,132 @@
     <label>Resultado en %</label><input type="number" placeholder="Ej. 100">
     <label>Requerimiento de equipo</label><textarea placeholder="¿Qué falta comprar / instalar?"></textarea>
     <label>Pendientes</label><textarea></textarea>
-    <label>Pruebas realizadas</label><textarea placeholder="Pruebas con foto, video, etc."></textarea>
+
+    <label>Pruebas realizadas</label>
+    <textarea placeholder="¿Qué pruebas hiciste?"></textarea>
+    <div class="upload-box">
+      <p>📷 Pruebas Realizadas - Sube evidencia (máx 4 fotos, se comprimen solas)</p>
+      <label class="upload-btn" for="fotoPrueba">📷 Tomar Foto</label>
+      <input type="file" id="fotoPrueba" accept="image/*" capture="environment">
+      <label class="upload-btn blue" for="archivoPrueba">📁 Subir Archivo</label>
+      <input type="file" id="archivoPrueba" accept="image/*,video/*,.pdf">
+      <div class="preview" id="prevPrueba"></div>
+      <p id="msgPrueba" style="margin-top:8px;font-weight:normal;color:#555"></p>
+    </div>
+
+    <label>Pruebas encontradas</label>
+    <textarea placeholder="¿Qué falla encontraste?"></textarea>
+    <div class="upload-box">
+      <p>🔍 Pruebas Encontradas - Sube evidencia de la falla (máx 4 fotos)</p>
+      <label class="upload-btn" for="fotoEncontrada">📷 Tomar Foto</label>
+      <input type="file" id="fotoEncontrada" accept="image/*" capture="environment">
+      <label class="upload-btn blue" for="archivoEncontrada">📁 Subir Archivo</label>
+      <input type="file" id="archivoEncontrada" accept="image/*,video/*,.pdf">
+      <div class="preview" id="prevEncontrada"></div>
+      <p id="msgEncontrada" style="margin-top:8px;font-weight:normal;color:#555"></p>
+    </div>
 
     <h2>4. Aceptación del Cliente</h2>
-    <label>Comentarios del cliente</label><textarea></textarea>
     <label>Comprobación</label><input type="text" placeholder="Conforme / No conforme">
-    <label>Nombre del técnico</label><input type="text" placeholder="Ángel Raúl Castillo Jiménez">
-    <label>Firma del cliente</label><input type="text" placeholder="Nombre y firma">
 
-    <button class="btn btn-send" onclick="alert('Reporte guardado. ¡Listo para enviar!')">ENVIAR REPORTE</button>
-    <button class="btn btn-pdf" onclick="window.print()">GENERAR PDF / IMPRIMIR</button>
+    <label>Firma del cliente</label>
+    <canvas id="firmaCanvas"></canvas>
+    <button type="button" class="btn-clear" onclick="limpiarFirma()">🧹 Limpiar firma</button>
+    <p style="font-size:12px;color:#777;margin:6px 0 0">El cliente firma aquí con el dedo o con el mouse</p>
+
+    <label>Nombre del técnico</label><input type="text" placeholder="Ángel Raúl Castillo Jiménez">
+
+    <button class="btn btn-send" onclick="nuevoServicio()">➕ NUEVO SERVICIO (sube el contador)</button>
+    <button class="btn btn-pdf" onclick="generarPDF()">GENERAR PDF / IMPRIMIR</button>
     <p style="text-align:center;font-size:13px;color:#555">Al generar PDF, elige "Guardar como PDF" y mándalo por WhatsApp</p>
+    <button type="button" class="btn btn-clear no-print" onclick="document.getElementById('inputLogo').click()">🖼️ Cambiar logo</button>
+    <input type="file" id="inputLogo" accept="image/*" hidden>
   </div>
   <div class="footer">PS Alarmas • Sistema de Reportes • ingeangelcastillo</div>
 </div>
+
+<script>
+  // --- LOGO ---
+  let logoGuardado = localStorage.getItem('ps_logo');
+  if(logoGuardado) document.getElementById('logoImg').src = logoGuardado;
+  document.getElementById('inputLogo').addEventListener('change', e=>{
+    let r=new FileReader(); r.onload=()=>{ document.getElementById('logoImg').src=r.result; localStorage.setItem('ps_logo', r.result); }; r.readAsDataURL(e.target.files[0]);
+  });
+
+  // --- CONTADOR AUTOMATICO ---
+  function getContador(){ return parseInt(localStorage.getItem('ps_contador')||'0'); }
+  function mostrarFolio(){ let n=getContador()+1; let anio=new Date().getFullYear(); document.getElementById('numServicio').value='PS-'+anio+'-'+String(n).padStart(4,'0'); }
+  mostrarFolio();
+  document.getElementById('fecha').valueAsDate=new Date();
+  function nuevoServicio(){
+    let n=getContador()+1; localStorage.setItem('ps_contador', n);
+    mostrarFolio();
+    alert('Listo, próximo servicio guardado');
+  }
+  function generarPDF(){
+    // Guardar contador solo cuando ya genera PDF
+    let n=getContador()+1; localStorage.setItem('ps_contador', n);
+    window.print();
+    setTimeout(mostrarFolio, 500);
+  }
+
+  // --- FOTOS COMPRIMIDAS Y CON PREVIEW - ARREGLO CLAVE ---
+  // Antes solo ponia texto "Foto lista", por eso no salia en PDF. Ahora si pega la foto en la hoja.
+  function comprimirYMostrar(file, previewId, msgId){
+    let preview=document.getElementById(previewId);
+    if(preview.querySelectorAll('img').length >= 4){ alert('Ya tienes 4 fotos en esta sección. Para que no se haga pesado, usa otra hoja.'); return; }
+    if(!file.type.startsWith('image/')){
+      document.getElementById(msgId).textContent='✅ Archivo listo: '+file.name+' (solo las imágenes se ven en el PDF, video/PDF mándalo aparte por WhatsApp)';
+      return;
+    }
+    let reader=new FileReader();
+    reader.onload=e=>{
+      let img=new Image();
+      img.onload=()=>{
+        // Comprimir: max 1000px de ancho, calidad 0.7 -> de 4MB baja a ~200KB
+        let canvas=document.createElement('canvas');
+        let scale=Math.min(1, 1000/img.width);
+        canvas.width=img.width*scale; canvas.height=img.height*scale;
+        let cctx=canvas.getContext('2d'); cctx.drawImage(img,0,0,canvas.width,canvas.height);
+        let comprimida=canvas.toDataURL('image/jpeg',0.7);
+        let out=document.createElement('img'); out.src=comprimida;
+        preview.appendChild(out);
+        document.getElementById(msgId).textContent='✅ Foto agregada y comprimida ('+preview.querySelectorAll('img').length+'/4)';
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  document.getElementById('fotoPrueba').addEventListener('change', e=>{ if(e.target.files[0]) comprimirYMostrar(e.target.files[0],'prevPrueba','msgPrueba'); e.target.value=''; });
+  document.getElementById('archivoPrueba').addEventListener('change', e=>{ if(e.target.files[0]) comprimirYMostrar(e.target.files[0],'prevPrueba','msgPrueba'); e.target.value=''; });
+  document.getElementById('fotoEncontrada').addEventListener('change', e=>{ if(e.target.files[0]) comprimirYMostrar(e.target.files[0],'prevEncontrada','msgEncontrada'); e.target.value=''; });
+  document.getElementById('archivoEncontrada').addEventListener('change', e=>{ if(e.target.files[0]) comprimirYMostrar(e.target.files[0],'prevEncontrada','msgEncontrada'); e.target.value=''; });
+
+  // --- FIRMA (igual que tenias) ---
+  const canvas = document.getElementById('firmaCanvas');
+  const ctx = canvas.getContext('2d');
+  function ajustarCanvas(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = 150;
+    ctx.strokeStyle = '#0b1e3a';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+  }
+  ajustarCanvas();
+  window.addEventListener('resize', ajustarCanvas);
+  let dibujando = false;
+  function getPos(e){
+    const rect = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return {x: t.clientX - rect.left, y: t.clientY - rect.top};
+  }
+  canvas.addEventListener('mousedown', e => {dibujando=true; const p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y);});
+  canvas.addEventListener('mousemove', e => {if(!dibujando) return; const p=getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke();});
+  canvas.addEventListener('mouseup', ()=> dibujando=false);
+  canvas.addEventListener('touchstart', e => {e.preventDefault(); dibujando=true; const p=getPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y);}, {passive:false});
+  canvas.addEventListener('touchmove', e => {e.preventDefault(); if(!dibujando) return; const p=getPos(e); ctx.lineTo(p.x,p.y); ctx.stroke();}, {passive:false});
+  canvas.addEventListener('touchend', ()=> dibujando=false);
+  function limpiarFirma(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+</script>
 </body>
 </html>
